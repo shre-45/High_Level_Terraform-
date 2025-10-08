@@ -15,6 +15,13 @@ resource "azuread_service_principal" "sp" {
 # Service Principal Password (Client Secret)
 resource "azuread_service_principal_password" "sp_secret" {
   service_principal_id = azuread_service_principal.sp.id
-  
+  end_date             = timeadd(timestamp(), "8760h") # 1 year from now
+}
+
+# Assign Contributor role at the subscription level
+resource "azurerm_role_assignment" "sp_contributor" {
+  scope                = "/subscriptions/${var.subscription_id}"
+  role_definition_name = "Contributor"
+  principal_id         = azuread_service_principal.sp.object_id
 }
 
