@@ -8,6 +8,11 @@ variable "service_principal_name" {
   description = "Service Principal name"
 }
 
+variable "subscription_id" {
+  description = "Target Azure subscription ID"
+  type        = string
+}
+
 variable "keyvault_name" {
   type        = string
   description = "Azure Key Vault name"
