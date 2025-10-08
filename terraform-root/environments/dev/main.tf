@@ -13,6 +13,7 @@ data "azurerm_client_config" "current" {}
 module "service-principal" {
   source                 = "../../modules/service-principal"
   service_principal_name = var.service_principal_name
+  subscription_id        = data.azurerm_client_config.current.subscription_id
 }
 
 module "keyvault" {
